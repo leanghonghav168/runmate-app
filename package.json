@@ -1,0 +1,16 @@
+{
+  "name": "runmate",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.34.1",
+  "scripts": {
+    "dev:mobile": "pnpm --filter mobile dev",
+    "dev:api": "pnpm --filter api start:dev",
+    "build:mobile": "pnpm --filter mobile build",
+    "build:api": "pnpm --filter api build",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "lint": "pnpm -r --if-present lint",
+    "test": "pnpm -r --if-present test"
+  }
+}

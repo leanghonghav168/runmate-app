@@ -1,0 +1,117 @@
+/* RunMate Modern Fitness App Design System */
+
+:root {
+  --ion-font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Primary Accent: Energetic Mint */
+  --ion-color-primary: #10B981;
+  --ion-color-primary-rgb: 16, 185, 129;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #059669;
+  --ion-color-primary-tint: #34D399;
+
+  /* Secondary Accent: Electric Azure */
+  --ion-color-secondary: #0EA5E9;
+  --ion-color-secondary-rgb: 14, 165, 233;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #0284C7;
+  --ion-color-secondary-tint: #38BDF8;
+
+  /* Tertiary: Dynamic Amber */
+  --ion-color-tertiary: #F59E0B;
+  --ion-color-tertiary-rgb: 245, 158, 11;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #D97706;
+  --ion-color-tertiary-tint: #FBBF24;
+
+  /* Success */
+  --ion-color-success: #10B981;
+  --ion-color-success-rgb: 16, 185, 129;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #059669;
+  --ion-color-success-tint: #34D399;
+
+  /* Warning */
+  --ion-color-warning: #F59E0B;
+  --ion-color-warning-rgb: 245, 158, 11;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #D97706;
+  --ion-color-warning-tint: #FBBF24;
+
+  /* Danger: Stop / Cancel */
+  --ion-color-danger: #EF4444;
+  --ion-color-danger-rgb: 239, 68, 68;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #DC2626;
+  --ion-color-danger-tint: #F87171;
+
+  /* Light Theme Surfaces */
+  --ion-background-color: #F8FAFC;
+  --ion-background-color-rgb: 248, 250, 252;
+  --ion-text-color: #0F172A;
+  --ion-text-color-rgb: 15, 23, 42;
+
+  --app-card-bg: #FFFFFF;
+  --app-card-border: rgba(226, 232, 240, 0.8);
+  --app-card-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
+  --app-surface-elevated: #F1F5F9;
+  --app-text-muted: #64748B;
+  --app-accent-glow: rgba(16, 185, 129, 0.2);
+}
+
+/* Dark Theme (matches system or class) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-background-color: #0B111E;
+    --ion-background-color-rgb: 11, 17, 30;
+    --ion-text-color: #F8FAFC;
+    --ion-text-color-rgb: 248, 250, 252;
+
+    --app-card-bg: #131C2E;
+    --app-card-border: rgba(255, 255, 255, 0.08);
+    --app-card-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.4);
+    --app-surface-elevated: #1E293B;
+    --app-text-muted: #94A3B8;
+    --app-accent-glow: rgba(16, 185, 129, 0.35);
+
+    --ion-toolbar-background: #0B111E;
+    --ion-tab-bar-background: #0F172A;
+    --ion-item-background: #131C2E;
+  }
+}
+
+/* Global utility classes for RunMate */
+.runmate-card {
+  background: var(--app-card-bg);
+  border: 1px solid var(--app-card-border);
+  border-radius: 20px;
+  box-shadow: var(--app-card-shadow);
+  padding: 18px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.runmate-card:active {
+  transform: scale(0.99);
+}
+
+.text-muted {
+  color: var(--app-text-muted);
+}
+
+.metric-number {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', monospace;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* Ensure Leaflet layers render properly inside Ionic pages */
+.leaflet-container {
+  font-family: inherit;
+  z-index: 10;
+}

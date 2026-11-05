@@ -1,0 +1,16 @@
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.log
+
+# Mobile
+apps/mobile/android/.gradle/
+apps/mobile/ios/Pods/
+
+# Prisma
+apps/api/src/generated/

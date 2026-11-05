@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ActivityType {
+  WALKING
+  RUNNING
+  DRIVING
+}
+
+enum ActivityStatus {
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id            String         @id @default(uuid())
+  name          String
+  email         String         @unique
+  passwordHash  String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  refreshTokens RefreshToken[]
+  activities    Activity[]
+
+  @@index([email])
+}
+
+model RefreshToken {
+  id         String    @id @default(uuid())
+  userId     String
+  tokenHash  String    @unique
+  expiresAt  DateTime
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
+
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tokenHash])
+}
+
+model Activity {
+  id              String         @id @default(uuid())
+  userId          String
+  activityType    ActivityType
+  status          ActivityStatus @default(IN_PROGRESS)
+  distanceMeters  Float          @default(0)
+  durationSeconds Int            @default(0)
+  averageSpeed    Float          @default(0)
+  maxSpeed        Float          @default(0)
+  averagePace     Float?
+  startedAt       DateTime
+  endedAt         DateTime?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  deletedAt       DateTime?
+
+  user            User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  locationPoints  LocationPoint[]
+
+  @@index([userId, startedAt])
+  @@index([userId, activityType])
+  @@index([status])
+}
+
+model LocationPoint {
+  id          String   @id @default(uuid())
+  activityId  String
+  latitude    Float
+  longitude   Float
+  altitude    Float?
+  accuracy    Float
+  speed       Float?
+  heading     Float?
+  recordedAt  DateTime
+
+  activity    Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+
+  @@index([activityId, recordedAt])
+}
+
