@@ -10,6 +10,10 @@ function getBaseUrl(): string {
   if (Capacitor.getPlatform() === 'android') {
     return 'http://10.0.2.2:3333/api/v1';
   }
+  // When running in browser on a deployed server (e.g., behind Nginx), route via current host
+  if (typeof window !== 'undefined' && window.location?.origin && window.location.hostname !== 'localhost') {
+    return `${window.location.origin}/api/v1`;
+  }
   return 'http://localhost:3333/api/v1';
 }
 
