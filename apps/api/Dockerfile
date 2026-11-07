@@ -26,8 +26,14 @@ RUN pnpm --filter api exec prisma generate
 # Build API application
 RUN pnpm --filter api build
 
-# Deploy production dependencies
-RUN pnpm --filter api --prod deploy /app/deployed-api
+# Deploy production dependencies (with --legacy for pnpm v10 compatibility)
+RUN pnpm --filter api --prod deploy --legacy /app/deployed-api
+
+# Ensure Prisma Client engine & generated artifacts are included in deployed-api runtime
+RUN cp -r /app/node_modules/.prisma /app/deployed-api/node_modules/.prisma 2>/dev/null || \
+    cp -r /app/apps/api/node_modules/.prisma /app/deployed-api/node_modules/.prisma 2>/dev/null || \
+    find /app -name ".prisma" -type d -exec cp -r {} /app/deployed-api/node_modules/ \; 2>/dev/null || true
+
 
 # ===================================================
 # Stage 2: Minimal Production Runtime
